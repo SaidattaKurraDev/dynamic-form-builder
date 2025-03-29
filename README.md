@@ -1,99 +1,147 @@
 # DynamicFormBuilder
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.1.
-This project has two panels:
 
-Admin Panel to build and save dynamic forms
+## Project Overview
 
-User Panel to fill and submit saved forms
+The DynamicFormBuilder contains two panels:
 
-Forms and their configurations are stored using NgRx Store and also synced with localStorage and JSON Server.
-Admin Panel (Form Builder)
-Built with standalone Angular components and Material UI
+- **Admin Panel**: Build and save dynamic forms
+- **User Panel**: Fill and submit saved forms
 
-Click to add input fields like:
+Form configurations are stored using NgRx Store, synced with localStorage, and persisted via JSON Server.
 
-Text, Textarea, Date, Select, Radio, Checkbox
+---
 
-Each field can be configured:
+## Admin Panel (Form Builder)
 
-Label, Placeholder, Help text, Required
+- Built using standalone Angular components with Angular Material UI.
+- Supports adding input fields:
+  - Text, Textarea, Date, Select, Radio, Checkbox.
+- Each field can be configured:
+  - Label, Placeholder, Help text, Required validation.
+  - Options for Select, Radio, and Checkbox fields.
+- Tooltips provide field configuration details (clean UI).
+- Form templates saved to NgRx store and localStorage.
+- Dynamic form validations based on configuration.
 
-Options for Select/Radio/Checkbox
+---
 
-Tooltips used for field config (clean UI)
+## User Panel (Form Submission)
 
-Form templates are saved to NgRx store + localStorage
+- Displays saved form templates.
+- Dynamically loads selected forms.
+- Renders fields based on saved configurations.
+- Validates required fields dynamically.
+- After submission, values are displayed and stored locally.
 
-Form validations (e.g., required fields) are set dynamically
-User Panel (Form Submission)
-Shows list of saved templates
-
-Loads selected form dynamically
-
-Fields rendered based on type
-
-Required validation handled
-After submission, values are displayed and saved locally
+---
 
 ## State Management (NgRx)
-Used Store, Actions, Reducers, and Selectors to handle template state
 
-Form templates stored in formTemplates state slice
+- Utilizes Store, Actions, Reducers, and Selectors.
+- Form templates stored in `formTemplates` state slice.
+- State synced with localStorage and persisted with JSON Server (`db.json`).
 
-Synced with localStorage + used db.json for persistence
+---
 
 ## Authentication
-Simple Auth Service created with username/password:
+
+- Simple Auth Service with username/password authentication using JSON Server:
+
+```json
 "users": [
-      {
-        "id": 1,
-        "email": "admin@formBuilder.com",
-        "password": "admin123",
-        "role": "admin"
-      },
-      {
-        "id": 2,
-        "email": "user@formBuilder.com",
-        "password": "user123",
-        "role": "user"
-      }
-Login page connects to JSON server and validates credentials
-Auth token stored in localStorage
+  {"id": 1, "email": "admin@formBuilder.com", "password": "admin123", "role": "admin"},
+  {"id": 2, "email": "user@formBuilder.com", "password": "user123", "role": "user"}
+]
+```
+- Login validation via JSON server.
+- Auth token stored in localStorage.
 
-## Auth Tests
-Unit tests written for the Auth Service and Form Submission
+---
 
-## Development server
+## Testing
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Unit tests provided for:
+  - Authentication Service.
+  - Form submission logic.
+- Execute tests via Karma (`ng test`).
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Development Setup
 
-## Build
+### Install Dependencies
+```bash
+npm install
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Run Development Server
 
-## Json Server
-JSON Server (for db.json)
-Make sure to install JSON Server globally if not already:
+```bash
+ng serve
+```
+
+Navigate to [http://localhost:4200/](http://localhost:4200/)
+
+### JSON Server Setup
+
+Ensure JSON Server is installed:
+```bash
 npm install -g json-server
-Start the JSON server:
+```
 
+Start JSON server:
+```bash
 json-server --watch db.json --port 3000
-This will run the backend at:
-http://localhost:3000
+```
 
-## Running unit tests
+Server available at [http://localhost:3000](http://localhost:3000)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+## Building Project
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+ng build
+```
 
-## Further help
+Artifacts stored in the `dist/` directory.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+## Code Generation
+
+Generate components, directives, services, etc.:
+
+```bash
+ng generate component component-name
+```
+
+---
+
+## Testing
+
+Run unit tests:
+
+```bash
+ng test
+```
+
+Run end-to-end tests (after adding e2e testing package):
+
+```bash
+ng e2e
+```
+
+---
+
+## Further Help
+
+Angular CLI help:
+
+```bash
+ng help
+```
+
+See [Angular CLI Overview and Command Reference](https://angular.io/cli) for detailed guidance.
